@@ -3,12 +3,12 @@ name: Build Android APK
 on:
   workflow_dispatch:  # 允许手动触发
   push:
-    branches: [ main, master ]
+    branches: [ master ]
     paths:
       - 'simple_live_app/**'
       - '.github/workflows/build.yml'
   pull_request:
-    branches: [ main, master ]
+    branches: [ master ]
     paths:
       - 'simple_live_app/**'
       - '.github/workflows/build.yml'
