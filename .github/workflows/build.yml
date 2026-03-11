@@ -7,14 +7,6 @@ on:
     paths:
       - 'simple_live_app/**'
       - '.github/workflows/build.yml'
-  pull_request:
-    branches: [ master ]
-    paths:
-      - 'simple_live_app/**'
-      - '.github/workflows/build.yml'
-
-env:
-  FLUTTER_VERSION: '3.38'
 
 jobs:
   build-apk:
@@ -33,7 +25,7 @@ jobs:
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: ${{ env.FLUTTER_VERSION }}
+          flutter-version: '3.38'
           channel: 'stable'
 
       - name: Dependencies
