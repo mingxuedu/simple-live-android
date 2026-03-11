@@ -1,0 +1,52 @@
+name: Build Android APK
+
+on:
+  workflow_dispatch:  # 允许手动触发
+  push:
+    branches: [ main, master ]
+    paths:
+      - 'simple_live_app/**'
+      - '.github/workflows/build.yml'
+  pull_request:
+    branches: [ main, master ]
+    paths:
+      - 'simple_live_app/**'
+      - '.github/workflows/build.yml'
+
+env:
+  FLUTTER_VERSION: '3.38'
+
+jobs:
+  build-apk:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+          channel: 'stable'
+
+      - name: Dependencies
+        working-directory: ./simple_live_app
+        run: flutter pub get
+
+      - name: Build APK
+        working-directory: ./simple_live_app
+        run: flutter build apk --release
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: simple-live-android
+          path: simple_live_app/build/app/outputs/flutter-apk/app-release.apk
+          retention-days: 7
