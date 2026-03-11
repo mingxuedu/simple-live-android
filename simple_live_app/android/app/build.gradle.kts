@@ -55,8 +55,8 @@ android {
         buildTypes {
             release {
                 signingConfig = signingConfigs.getByName("release")
-                isMinifyEnabled true
-                isShrinkResources true
+                isMinifyEnabled = true
+                isShrinkResources = true
                 proguardFiles(
                     // Default file with automatically generated optimization rules.
                     getDefaultProguardFile("proguard-android-optimize.txt"),
@@ -68,8 +68,8 @@ android {
         // No signing config - use debug keys for release build
         buildTypes {
             release {
-                isMinifyEnabled false
-                isShrinkResources false
+                isMinifyEnabled = false
+                isShrinkResources = false
                 proguardFiles(
                     getDefaultProguardFile("proguard-android-optimize.txt"),
                     "proguard-rules.pro"
